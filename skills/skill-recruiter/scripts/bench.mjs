@@ -9,7 +9,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync, appendFileSync } from "node:fs";
 import { basename, join } from "node:path";
-import { BENCH, PROBES, PROFILES } from "./paths.mjs";
+import { BENCH, PROBES, PROFILES, ensureData } from "./paths.mjs";
 
 function setup(argv) {
   const [track, ...skills] = positional(argv);
@@ -229,6 +229,7 @@ function verdict(argv) {
     ].join("\n")
   );
 
+  ensureData();
   appendFileSync(
     PROFILES,
     [

@@ -35,7 +35,24 @@ deferring to skills that were not installed.
 
 ## Install
 
-Requires Node 18+ and git. `gh` is optional but recommended for GitHub search.
+Pick whichever fits your setup. All of them put the same folder in the same place, and none of
+them need sudo or touch anything outside your home directory.
+
+**Claude Code, as a plugin** — one command, updates with the rest of your plugins:
+
+```
+/plugin marketplace add lopes061/skill-recruiter
+/plugin install skill-recruiter@skill-recruiter
+```
+
+**Anywhere with Node 18+** — no clone, no install step of its own:
+
+```bash
+npx -y github:lopes061/skill-recruiter install
+```
+
+**From a clone**, when you want to read it before running it (the recommended way to treat any
+skill, including this one):
 
 ```bash
 git clone https://github.com/lopes061/skill-recruiter.git
@@ -43,11 +60,39 @@ cd skill-recruiter
 ./install.sh
 ```
 
-The installer copies `skill/` into your skills directory as `skill-recruiter`. Paths resolve in this
-order: `$SKILLS_HOME`, `~/.claude/skills`, `~/.claude-shared/skills`. Quarantine and archive are
-created next to whichever is found.
+There is deliberately no `curl … | bash` one-liner. This tool vetoes skills that ship one.
 
-Then restart Claude Code and ask it to route a task, or run the scripts directly.
+### Or hand it to your agent
+
+Paste this into Claude Code, Codex, Cursor, or anything else that can run a command:
+
+```text
+Install skill-recruiter from https://github.com/lopes061/skill-recruiter for me:
+
+1. Run: npx -y github:lopes061/skill-recruiter install
+2. Confirm my skills directory now contains skill-recruiter/SKILL.md, and tell me the path.
+3. Read that SKILL.md and summarise its five modes in three lines.
+4. If this project has a rules file (CLAUDE.md, AGENTS.md, .cursor/rules), append one line
+   telling you to route technical tasks through skill-recruiter first — and to skip it for
+   plain questions, harness commands, and when I name a skill myself.
+5. Then run: npx -y github:lopes061/skill-recruiter analyze --installed
+   and show me the three worst findings.
+```
+
+Step 5 is the point. It audits what you already have, which is usually where the surprises are.
+
+### Where things land
+
+Paths resolve in this order: `$SKILLS_HOME`, `~/.claude/skills`, `~/.claude-shared/skills`.
+Quarantine and archive are created next to whichever is found. Installed as a plugin, the folder is
+a cache that updates replace, so your `CATALOG.md` and `PROFILES.md` are kept outside it.
+
+### What it works with
+
+The scripts are plain Node with no dependencies — `search`, `analyze`, `bench` and `shelf` run
+under any agent, or none. The routing half uses the `SKILL.md` convention, which Claude Code and
+the Agent SDK load on their own; for other agents, point their rules file at the installed
+`SKILL.md` and they will follow it the same way.
 
 ## Make it run on every prompt
 
@@ -156,19 +201,27 @@ is being measured. A new probe is one more file in `probes/`.
 ## Files
 
 ```
-skill/
-├─ SKILL.md            the skill itself: routing, discovery, analysis, bench, shelf
-├─ BENCH.md            the full bench protocol
-├─ CATALOG.md          what each installed skill promises   (example — replace)
-├─ PROFILES.md         what each one delivered              (example — replace)
-├─ probes/             the probes a bench can run
+.claude-plugin/     plugin and marketplace manifests
+bin/cli.mjs         one entry point for every command
+install.sh          copy into place, no network, no sudo
+tests/              node --test over the detectors
+skills/skill-recruiter/
+├─ SKILL.md         the skill itself: routing, discovery, analysis, bench, shelf
+├─ BENCH.md         the full bench protocol
+├─ CATALOG.md       what each installed skill promises   (example — replace)
+├─ PROFILES.md      what each one delivered              (example — replace)
+├─ probes/          the probes a bench can run
 └─ scripts/
-   ├─ paths.mjs        where skills live on this machine
-   ├─ discover.mjs     search · inspect · fetch
-   ├─ analyze.mjs      read a skill end to end, report on six axes
-   ├─ bench.mjs        setup · compare · reveal · verdict
-   └─ shelf.mjs        list · overlap · promote · archive · restore
+   ├─ paths.mjs     where skills live, and where this may write
+   ├─ discover.mjs  search · inspect · fetch
+   ├─ analyze.mjs   read a skill end to end, report on six axes
+   ├─ bench.mjs     setup · compare · reveal · verdict
+   └─ shelf.mjs     list · overlap · promote · archive · restore
 ```
+
+Run the tests with `npm test`. They cover the cases that misfired on real skills: a negated
+warning, a security skill's own subject matter, an example path inside a code fence, a sibling
+reference, a placeholder name, and a version floor.
 
 ## License
 

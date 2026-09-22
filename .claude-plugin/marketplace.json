@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "skill-recruiter",
+  "description": "Router and curator for agent skills: find them, read them, bench them, keep the good ones.",
+  "owner": {
+    "name": "Enzo Lopes"
+  },
+  "plugins": [
+    {
+      "name": "skill-recruiter",
+      "description": "HR for your agent's skills. Routes each task to the right stack, sources candidates on GitHub, screens them on six axes, runs rivals blind against the same probe, and archives what only takes up space.",
+      "author": {
+        "name": "Enzo Lopes"
+      },
+      "category": "productivity",
+      "source": "./"
+    }
+  ]
+}

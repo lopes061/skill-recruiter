@@ -1,0 +1,11 @@
+{
+  "name": "skill-recruiter",
+  "description": "HR for your agent's skills: sources them on GitHub, screens them end to end, interviews rivals blind on a bench, and staffs the right one for each task.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Enzo Lopes"
+  },
+  "homepage": "https://github.com/lopes061/skill-recruiter",
+  "license": "MIT",
+  "keywords": ["skills", "routing", "curation", "bench", "audit"]
+}

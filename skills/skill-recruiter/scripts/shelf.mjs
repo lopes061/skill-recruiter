@@ -9,7 +9,7 @@
 
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync, renameSync, cpSync, rmSync } from "node:fs";
 import { join } from "node:path";
-import { SKILLS, QUARANTINE, ARCHIVE, PROFILES, frontmatter } from "./paths.mjs";
+import { SKILLS, QUARANTINE, ARCHIVE, PROFILES, ensureData, frontmatter } from "./paths.mjs";
 
 const STOP = new Set(
   ("the and for with when this that you your use using should from into are can its their they them not all any via each such more most other than then asks ask user users task tasks tool tools code file files skill skills claude agent").split(" ")
@@ -63,6 +63,7 @@ function read(dir, state) {
 }
 
 function hasProfile(name) {
+  ensureData();
   if (!existsSync(PROFILES)) return false;
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return new RegExp(`^##\\s+\`?${escaped}\`?\\s*$`, "m").test(readFileSync(PROFILES, "utf8"));

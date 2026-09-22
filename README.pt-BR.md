@@ -34,7 +34,24 @@ stub delegando para skill não instalada.
 
 ## Instalação
 
-Precisa de Node 18+ e git. `gh` é opcional, mas recomendado para a busca no GitHub.
+Escolha a que couber no seu setup. Todas colocam a mesma pasta no mesmo lugar, nenhuma pede sudo e
+nenhuma escreve fora da sua pasta de usuário.
+
+**Claude Code, como plugin** — um comando, atualiza junto com os outros plugins:
+
+```
+/plugin marketplace add lopes061/skill-recruiter
+/plugin install skill-recruiter@skill-recruiter
+```
+
+**Em qualquer máquina com Node 18+** — sem clone:
+
+```bash
+npx -y github:lopes061/skill-recruiter install
+```
+
+**A partir de um clone**, quando você quer ler antes de rodar (que é como se deve tratar qualquer
+skill, inclusive esta):
 
 ```bash
 git clone https://github.com/lopes061/skill-recruiter.git
@@ -42,11 +59,39 @@ cd skill-recruiter
 ./install.sh
 ```
 
-O instalador copia `skill/` para a sua pasta de skills como `skill-recruiter`. Os caminhos são
-resolvidos nesta ordem: `$SKILLS_HOME`, `~/.claude/skills`, `~/.claude-shared/skills`. Quarentena e
-arquivo nascem ao lado do que for encontrado.
+Não existe `curl … | bash` de propósito. Esta ferramenta reprova skill que traz um.
 
-Depois reinicie o Claude Code.
+### Ou entregue pra sua IA
+
+Cole isto no Claude Code, no Codex, no Cursor, ou em qualquer coisa que rode comando:
+
+```text
+Instale o skill-recruiter de https://github.com/lopes061/skill-recruiter pra mim:
+
+1. Rode: npx -y github:lopes061/skill-recruiter install
+2. Confirme que a minha pasta de skills agora tem skill-recruiter/SKILL.md e me diga o caminho.
+3. Leia esse SKILL.md e me resuma os cinco modos em três linhas.
+4. Se este projeto tiver arquivo de regras (CLAUDE.md, AGENTS.md, .cursor/rules), acrescente uma
+   linha mandando você rotear tarefa técnica pelo skill-recruiter primeiro — e pular isso em
+   pergunta pura, comando de harness, e quando eu nomear uma skill.
+5. Depois rode: npx -y github:lopes061/skill-recruiter analyze --installed
+   e me mostre os três piores achados.
+```
+
+O passo 5 é o que importa. Ele audita o que você já tem, que costuma ser onde estão as surpresas.
+
+### Onde as coisas ficam
+
+Os caminhos resolvem nesta ordem: `$SKILLS_HOME`, `~/.claude/skills`, `~/.claude-shared/skills`.
+Quarentena e arquivo nascem ao lado do que for encontrado. Instalado como plugin, a pasta é um cache
+que a atualização substitui — por isso o seu `CATALOG.md` e o seu `PROFILES.md` ficam fora dela.
+
+### Com o que funciona
+
+Os scripts são Node puro, sem dependência: `search`, `analyze`, `bench` e `shelf` rodam sob
+qualquer agente, ou nenhum. A metade de roteamento usa a convenção `SKILL.md`, que o Claude Code e
+o Agent SDK carregam sozinhos; em outro agente, aponte o arquivo de regras dele para o `SKILL.md`
+instalado e ele segue igual.
 
 ## Fazendo disparar a cada prompt
 
@@ -150,6 +195,31 @@ coisa. As duas ficam, as duas ganham perfil, e o roteador passa a escolher pela 
 Seis provas vêm junto: `visual`, `visual-mobile`, `data`, `code`, `security`, `nextjs`. Cada uma
 deixa cor, tipografia e arquitetura em aberto de propósito — o que a skill preenche sozinha é
 justamente o que está sendo medido. Prova nova é mais um arquivo em `probes/`.
+
+## Arquivos
+
+```
+.claude-plugin/     manifestos de plugin e marketplace
+bin/cli.mjs         uma porta de entrada para todos os comandos
+install.sh          copia no lugar, sem rede, sem sudo
+tests/              node --test sobre os detectores
+skills/skill-recruiter/
+├─ SKILL.md         a skill: roteamento, busca, análise, bancada, prateleira
+├─ BENCH.md         o protocolo da bancada
+├─ CATALOG.md       o que cada skill instalada promete   (exemplo — troque)
+├─ PROFILES.md      o que cada uma entregou              (exemplo — troque)
+├─ probes/          as provas que a bancada roda
+└─ scripts/
+   ├─ paths.mjs     onde as skills moram e onde isto pode escrever
+   ├─ discover.mjs  search · inspect · fetch
+   ├─ analyze.mjs   lê a skill inteira e reporta em seis eixos
+   ├─ bench.mjs     setup · compare · reveal · verdict
+   └─ shelf.mjs     list · overlap · promote · archive · restore
+```
+
+Rode os testes com `npm test`. Eles cobrem os casos que erraram em skill de verdade: aviso negado,
+assunto próprio de skill de segurança, caminho de exemplo dentro de bloco de código, referência
+irmã, nome placeholder e piso de versão.
 
 ## Licença
 

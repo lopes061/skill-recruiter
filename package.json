@@ -1,0 +1,30 @@
+{
+  "name": "skill-recruiter",
+  "version": "0.1.0",
+  "description": "HR for your agent's skills: sources them on GitHub, screens them end to end, interviews rivals blind on a bench, and staffs the right one for each task.",
+  "type": "module",
+  "bin": {
+    "skill-recruiter": "bin/cli.mjs"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "bin",
+    "skills",
+    "install.sh",
+    "README.md",
+    "README.pt-BR.md",
+    "LICENSE"
+  ],
+  "keywords": ["claude", "claude-code", "skills", "agent", "ai", "routing", "curation"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lopes061/skill-recruiter.git"
+  },
+  "license": "MIT",
+  "author": "Enzo Lopes"
+}
