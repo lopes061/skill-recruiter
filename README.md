@@ -38,7 +38,7 @@ deferring to skills that were not installed.
 Requires Node 18+ and git. `gh` is optional but recommended for GitHub search.
 
 ```bash
-git clone https://github.com/<you>/skill-recruiter.git
+git clone https://github.com/lopes061/skill-recruiter.git
 cd skill-recruiter
 ./install.sh
 ```

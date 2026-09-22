@@ -37,7 +37,7 @@ stub delegando para skill não instalada.
 Precisa de Node 18+ e git. `gh` é opcional, mas recomendado para a busca no GitHub.
 
 ```bash
-git clone https://github.com/<voce>/skill-recruiter.git
+git clone https://github.com/lopes061/skill-recruiter.git
 cd skill-recruiter
 ./install.sh
 ```

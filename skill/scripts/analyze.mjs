@@ -72,7 +72,8 @@ function checkMetadata(skill, add) {
   if (meta.description.length > 1024) {
     add("metadata", "low", `Description is ${meta.description.length} chars; it is injected into every session.`);
   }
-  if (!/\b(use when|when the user|use this|triggers? on|invoke when)\b/i.test(meta.description)) {
+  const TRIGGER = /\b(use (it )?(when|before|after|for)|when the user|use this|triggers? on|fires when|invoke (when|before)|before any)\b/i;
+  if (!TRIGGER.test(meta.description)) {
     add("metadata", "medium", 'Description states what it is but never "use when…", so routing has nothing to match.');
   }
 }
@@ -110,6 +111,8 @@ function checkDeadReferences(skill, add) {
   }
 }
 
+const PLACEHOLDER = /^(other|some|another|your|my|this|that|the|a|an|foo|bar|baz|example|sample|name|placeholder)-/;
+
 function checkPhantomSkills(skill, add, installed) {
   const mentioned = new Map();
   for (const file of skill.files) {
@@ -122,6 +125,8 @@ function checkPhantomSkills(skill, add, installed) {
       ];
       for (const candidate of names) {
         if (candidate === skill.name || installed.has(candidate)) continue;
+        // `@other-skill` in a sentence describing the pattern is an example, not a dependency.
+        if (PLACEHOLDER.test(candidate)) continue;
         if (!/(-expert|-skills?|-patterns|-best-practices|-optimizer|-reviewer|-guidelines|-testing|-cli)$/.test(candidate)) continue;
         if (!mentioned.has(candidate)) mentioned.set(candidate, `${file.rel}:${i + 1}`);
       }
