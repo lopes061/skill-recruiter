@@ -14,6 +14,12 @@ search GitHub  →  quarantine  →  analyze  →  bench  →  profile  →  act
                                               archive
 ```
 
+![Two skills, one probe, names hidden](<https://raw.githubusercontent.com/lopes061/skill-recruiter/main/docs/bench.png>)
+
+*The bench: the same probe run through two skills, side by side, with the names drawn and hidden.
+One delivers a correct, quiet card list; the other has an opinion. Neither is wrong — they are for
+different situations, and that is what gets written down.*
+
 Nothing reaches your skills directory without passing through. A fetched skill lands in quarantine,
 which is not on the load path. A rejected one goes to the archive with its verdict, and comes back
 with one command.
@@ -164,6 +170,8 @@ node scripts/shelf.mjs archive <name> --reason "..."
 | danger | destructive commands, credential reads, harness-configuration edits |
 | version drift | it targets a major version your project does not run |
 | overlap | it covers ground something installed already covers |
+
+![A hollow skill next to a real one](<https://raw.githubusercontent.com/lopes061/skill-recruiter/main/docs/analyze.svg>)
 
 **Auto-veto applies to one class only: a skill that would act against its operator.** Everything
 else is a recommendation, because a strange-looking skill can still be the right one. Three

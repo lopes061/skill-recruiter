@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="507" viewBox="0 0 1160 507" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" xml:space="preserve">
+  <rect width="1160" height="507" rx="10" fill="#1a1814"/>
+  <rect x="0" y="0" width="1160" height="32" fill="#242019"/>
+  <rect x="0" y="10" width="1160" height="22" fill="#242019"/>
+  <circle cx="22" cy="16" r="5" fill="#3d372f"/><circle cx="40" cy="16" r="5" fill="#3d372f"/><circle cx="58" cy="16" r="5" fill="#3d372f"/>
+  <text style="white-space:pre" x="80" y="20" fill="#7a7266" font-size="11">skill-recruiter analyze ./candidate ./prisma-expert</text>
+<text style="white-space:pre" x="24" y="50" font-weight="600" fill="#f2ece1">database-optimization-workflow<tspan fill="#8a8275" font-weight="400">  —  </tspan><tspan fill="#e8836b">REJECT (0/100)</tspan></text>
+<text style="white-space:pre" x="24" y="71" fill="#8a8275">  13 content lines, 0 of them code (0%)</text>
+<text style="white-space:pre" x="24" y="92" fill="#cfc8bb"></text>
+<text style="white-space:pre" x="24" y="113" fill="#cfc8bb"><tspan fill="#e8836b">  [high    ]</tspan> <tspan fill="#8a8275">dead-reference:</tspan> SKILL.md:23 points to `resources/implementation-playbook.md`, which does not exist.</text>
+<text style="white-space:pre" x="24" y="134" fill="#cfc8bb"><tspan fill="#e8836b">  [high    ]</tspan> <tspan fill="#8a8275">substance:</tspan> No command, no example, no code: it asserts instead of showing. A bench can still prove it right — the model ma…</text>
+<text style="white-space:pre" x="24" y="155" fill="#cfc8bb"><tspan fill="#e8836b">  [high    ]</tspan> <tspan fill="#8a8275">substance:</tspan> Hollow: 0% code lines and 6 checklist items with no noun to check ("Performance improved").</text>
+<text style="white-space:pre" x="24" y="176" fill="#cfc8bb"><tspan fill="#e8836b">  [high    ]</tspan> <tspan fill="#8a8275">substance:</tspan> 3 "Use @other-skill" stubs and almost no content of its own — it delegates instead of knowing.</text>
+<text style="white-space:pre" x="24" y="197" fill="#cfc8bb"><tspan fill="#e3b567">  [medium  ]</tspan> <tspan fill="#8a8275">metadata:</tspan> Description states what it is but never "use when…", so routing has nothing to match.</text>
+<text style="white-space:pre" x="24" y="218" fill="#cfc8bb"><tspan fill="#e3b567">  [medium  ]</tspan> <tspan fill="#8a8275">phantom-dependency:</tspan> SKILL.md:10 tells the model to use `database-optimizer`, which is not installed here.</text>
+<text style="white-space:pre" x="24" y="239" fill="#cfc8bb"><tspan fill="#e3b567">  [medium  ]</tspan> <tspan fill="#8a8275">phantom-dependency:</tspan> SKILL.md:11 tells the model to use `sql-optimization-patterns`, which is not installed here.</text>
+<text style="white-space:pre" x="24" y="260" fill="#cfc8bb"><tspan fill="#e3b567">  [medium  ]</tspan> <tspan fill="#8a8275">phantom-dependency:</tspan> SKILL.md:12 tells the model to use `monitoring-expert`, which is not installed here.</text>
+<text style="white-space:pre" x="24" y="281" fill="#cfc8bb"><tspan fill="#e3b567">  [medium  ]</tspan> <tspan fill="#8a8275">substance:</tspan> Only 13 lines of content — thin.</text>
+<text style="white-space:pre" x="24" y="302" fill="#cfc8bb"><tspan fill="#8a8275">  [low     ]</tspan> <tspan fill="#8a8275">provenance:</tspan> No .origin.json — where this came from is not recorded.</text>
+<text style="white-space:pre" x="24" y="323" fill="#cfc8bb"></text>
+<text style="white-space:pre" x="24" y="344" font-weight="600" fill="#f2ece1">prisma-expert<tspan fill="#8a8275" font-weight="400">  —  </tspan><tspan fill="#7bd3a8">PROMOTE (89/100)</tspan></text>
+<text style="white-space:pre" x="24" y="365" fill="#8a8275">  295 content lines, 143 of them code (48%)</text>
+<text style="white-space:pre" x="24" y="386" fill="#cfc8bb"></text>
+<text style="white-space:pre" x="24" y="407" fill="#cfc8bb"><tspan fill="#e3b567">  [medium  ]</tspan> <tspan fill="#8a8275">metadata:</tspan> Description states what it is but never "use when…", so routing has nothing to match.</text>
+<text style="white-space:pre" x="24" y="428" fill="#cfc8bb"><tspan fill="#8a8275">  [low     ]</tspan> <tspan fill="#8a8275">provenance:</tspan> No .origin.json — where this came from is not recorded.</text>
+<text style="white-space:pre" x="24" y="449" fill="#cfc8bb"></text>
+<text style="white-space:pre" x="24" y="470" fill="#f2ece1">2 analyzed — 1 promote, 0 bench, 0 review, 1 reject</text>
+</svg>

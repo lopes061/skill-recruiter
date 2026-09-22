@@ -14,6 +14,12 @@ busca no GitHub  →  quarentena  →  análise  →  bancada  →  perfil  → 
                                                 arquivo
 ```
 
+![Duas skills, uma prova, nomes escondidos](<https://raw.githubusercontent.com/lopes061/skill-recruiter/main/docs/bench.png>)
+
+*A bancada: a mesma prova rodada em duas skills, lado a lado, com os nomes sorteados e escondidos.
+Uma entrega lista de cartão correta e quieta; a outra tem opinião. Nenhuma está errada — servem a
+situações diferentes, e é isso que fica registrado.*
+
 Nada chega na sua pasta de skills sem passar por aqui. Skill baixada cai na quarentena, que não é
 carregada em sessão nenhuma. Reprovada vai para o arquivo com o laudo, e volta com um comando.
 
@@ -163,6 +169,8 @@ node scripts/shelf.mjs archive <nome> --reason "..."
 | perigo | comando destrutivo, leitura de credencial, edição da configuração do harness |
 | versão | mira uma major que o seu projeto não roda |
 | sobreposição | cobre o mesmo terreno de algo já instalado |
+
+![Uma skill oca ao lado de uma de verdade](<https://raw.githubusercontent.com/lopes061/skill-recruiter/main/docs/analyze.svg>)
 
 **Veto automático existe para uma classe só: skill que agiria contra o operador.** O resto é
 recomendação, porque skill de aparência estranha ainda pode ser a certa. Três calibragens, cada uma
