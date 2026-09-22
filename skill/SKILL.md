@@ -1,9 +1,9 @@
 ---
-name: skill-bench
+name: skill-recruiter
 description: Routes to the right skills for a task and curates the shelf they live on. Reads the local catalog, composes a stack (four at most, in order), and invokes it. Also finds skills on GitHub, reads them end to end, benches rivals blind, and archives what only takes up space. Use before any technical task, and for "which skill should I use", "find a skill for X", "are these two the same", "test these skills", "clean up my skills".
 ---
 
-# Skill Bench
+# Skill Recruiter
 
 Two jobs, one skill.
 

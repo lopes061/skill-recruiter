@@ -171,7 +171,7 @@ function archive(argv) {
       ? join(QUARANTINE, name)
       : null;
   if (!from) die(`Found no ${name} in skills/ or quarantine.`);
-  if (name === "skill-bench") die("No. That is the one doing the deciding.");
+  if (name === "skill-recruiter") die("No. That is the one doing the deciding.");
 
   mkdirSync(ARCHIVE, { recursive: true });
   const to = join(ARCHIVE, name);

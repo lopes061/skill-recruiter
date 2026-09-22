@@ -34,7 +34,7 @@ export const QUARANTINE = sibling(BASE, "skills-quarantine", "skills-quarentena"
 export const ARCHIVE = sibling(BASE, "skills-archive", "skills-arquivo");
 export const BENCH = sibling(BASE, "bench", "bancada");
 
-export const SELF = join(SKILLS, "skill-bench");
+export const SELF = join(SKILLS, "skill-recruiter");
 export const PROFILES = join(SELF, "PROFILES.md");
 export const CATALOG = join(SELF, "CATALOG.md");
 export const PROBES = join(SELF, "probes");

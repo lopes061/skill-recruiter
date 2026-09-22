@@ -34,7 +34,7 @@ async function api(path, params = {}) {
     const out = execFileSync("gh", ["api", "--method", "GET", target], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
     return JSON.parse(out);
   }
-  const headers = { Accept: "application/vnd.github+json", "User-Agent": "skill-bench" };
+  const headers = { Accept: "application/vnd.github+json", "User-Agent": "skill-recruiter" };
   if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
   const res = await fetch("https://api.github.com/" + target, { headers });
   if (res.status === 403 || res.status === 429) {
@@ -45,7 +45,7 @@ async function api(path, params = {}) {
 }
 
 async function raw(repo, ref, path) {
-  const headers = { "User-Agent": "skill-bench" };
+  const headers = { "User-Agent": "skill-recruiter" };
   if (!GH && process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
   const res = await fetch(`https://raw.githubusercontent.com/${repo}/${ref}/${path}`, { headers });
   return res.ok ? res.text() : null;
@@ -191,7 +191,7 @@ async function fetch_(argv) {
   const wanted = args.slice(1);
 
   const meta = await api(`repos/${repo}`);
-  const temp = join(tmpdir(), `skill-bench-${Date.now()}`);
+  const temp = join(tmpdir(), `skill-recruiter-${Date.now()}`);
   const url = `https://github.com/${repo}.git`;
 
   if (wanted.length) {

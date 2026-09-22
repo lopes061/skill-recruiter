@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installs skill-bench into your Claude Code skills directory.
+# Installs skill-recruiter into your Claude Code skills directory.
 set -euo pipefail
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -17,12 +17,12 @@ resolve_home() {
 }
 
 skills_home="$(resolve_home)"
-target="$skills_home/skill-bench"
+target="$skills_home/skill-recruiter"
 
 echo "Skills directory: $skills_home"
 
 if [ -e "$target" ]; then
-  read -r -p "skill-bench is already installed. Overwrite it? [y/N] " answer
+  read -r -p "skill-recruiter is already installed. Overwrite it? [y/N] " answer
   case "$answer" in
     [yY]*) ;;
     *) echo "Nothing changed."; exit 0 ;;

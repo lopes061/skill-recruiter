@@ -1,4 +1,4 @@
-# Skill Bench
+# Skill Recruiter
 
 Português: [README.pt-BR.md](README.pt-BR.md)
 
@@ -38,16 +38,52 @@ deferring to skills that were not installed.
 Requires Node 18+ and git. `gh` is optional but recommended for GitHub search.
 
 ```bash
-git clone https://github.com/<you>/skill-bench.git
-cd skill-bench
+git clone https://github.com/<you>/skill-recruiter.git
+cd skill-recruiter
 ./install.sh
 ```
 
-The installer copies `skill/` into your skills directory as `skill-bench`. Paths resolve in this
+The installer copies `skill/` into your skills directory as `skill-recruiter`. Paths resolve in this
 order: `$SKILLS_HOME`, `~/.claude/skills`, `~/.claude-shared/skills`. Quarantine and archive are
 created next to whichever is found.
 
 Then restart Claude Code and ask it to route a task, or run the scripts directly.
+
+## Make it run on every prompt
+
+The router is only useful if it fires before you start working, not after. Two ways:
+
+**A line in `CLAUDE.md`** — the simple one, works everywhere:
+
+```markdown
+Before any technical task — writing code, touching UI, reviewing, testing, database work —
+invoke `skill-recruiter` with the task as the argument. It reads the catalog, composes the
+stack (four skills at most, in the right order) and shows the choice before executing.
+
+Skip it only for: a plain question, a harness command, conversation, or when I name a skill myself.
+```
+
+Keep the skip list. Without it the router fires on "what does this file do?" and wastes a turn.
+
+**A `UserPromptSubmit` hook** — for when you want it enforced rather than suggested. In
+`~/.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "type": "command", "command": "echo 'Route through skill-recruiter before technical work.'" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+The hook injects the reminder into every prompt. The `CLAUDE.md` line is advice the model can weigh;
+the hook is text it always receives. Start with the line — most setups never need the hook.
 
 ## Commands
 

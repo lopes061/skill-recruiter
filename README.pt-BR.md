@@ -1,4 +1,4 @@
-# Skill Bench
+# Skill Recruiter
 
 English: [README.md](README.md)
 
@@ -37,16 +37,52 @@ stub delegando para skill não instalada.
 Precisa de Node 18+ e git. `gh` é opcional, mas recomendado para a busca no GitHub.
 
 ```bash
-git clone https://github.com/<voce>/skill-bench.git
-cd skill-bench
+git clone https://github.com/<voce>/skill-recruiter.git
+cd skill-recruiter
 ./install.sh
 ```
 
-O instalador copia `skill/` para a sua pasta de skills como `skill-bench`. Os caminhos são
+O instalador copia `skill/` para a sua pasta de skills como `skill-recruiter`. Os caminhos são
 resolvidos nesta ordem: `$SKILLS_HOME`, `~/.claude/skills`, `~/.claude-shared/skills`. Quarentena e
 arquivo nascem ao lado do que for encontrado.
 
 Depois reinicie o Claude Code.
+
+## Fazendo disparar a cada prompt
+
+O roteador só serve se ele roda antes do trabalho começar, não depois. Dois jeitos:
+
+**Uma linha no `CLAUDE.md`** — o simples, funciona em qualquer lugar:
+
+```markdown
+Antes de qualquer tarefa técnica — escrever código, mexer em UI, revisar, testar, mexer em banco —
+invoque `skill-recruiter` com a tarefa como argumento. Ele lê o catálogo, monta o stack certo
+(máx. 4 skills, na ordem certa) e mostra a escolha antes de executar.
+
+Pular só quando: pergunta pura, comando de harness, conversa, ou quando eu nomeei uma skill.
+```
+
+Mantenha a lista de exceções. Sem ela o roteador dispara em "o que faz esse arquivo?" e gasta um turno.
+
+**Um hook `UserPromptSubmit`** — para quando você quer obrigação, não sugestão. Em
+`~/.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "type": "command", "command": "echo 'Route through skill-recruiter before technical work.'" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+O hook injeta o lembrete em todo prompt. A linha no `CLAUDE.md` é conselho que o modelo pondera; o
+hook é texto que ele sempre recebe. Comece pela linha — a maioria nunca precisa do hook.
 
 ## Comandos
 
